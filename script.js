@@ -6,6 +6,7 @@ const guessResult = document.querySelector('.guessResult');
 const lastGuess = document.querySelector('.lastGuess');
 let guessCount = 1;
 let resetButton
+const imageContainer = document.querySelector(".imageContainer")
 
 function checkGuess() {
     let userGuess = Number(inputNum.value)
@@ -15,9 +16,14 @@ function checkGuess() {
     preGuess.textContent += ` ${userGuess}`
 
     if (userGuess === randomNumber) {
-        guessResult.textContent = "OMG! You kill it!";
-        guessResult.textContent = "I am sorry baby for how I acted in the morning, ma binu simi Oko Mhi!";
+        guessResult.textContent = `OMG! You kill it!`;
+        const img = new Image()
+        img.src = "images/twobg.png"
+        img.height = 100;
+        imageContainer.appendChild(img);
+        guessResult.textContent += " I am sorry baby for how I acted in the morning, ma binu simi Oko Mhi!";
         guessResult.style.backgroundColor = "green";
+        lastGuess.textContent = ""
         gameOver()
     }else if (guessCount === 10) {
         guessResult.textContent = "!!! GAME OVER !!!"
@@ -50,6 +56,7 @@ function gameOver() {
 function resetGame() {
     guessCount = 1;
     resetButton.remove()
+    imageContainer.remove()
     const resetParams = document.querySelectorAll(".resetParams p")
     for (let resetParam of resetParams){
         resetParam.textContent = ""
